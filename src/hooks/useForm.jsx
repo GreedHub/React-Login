@@ -12,7 +12,18 @@ function useForm(initialValue) {
                 return null;
             }
 
-            newState[k]['hasBeenClicked'] = false;
+            newState[k].value = newState[k].value ? newState[k].value : '';
+
+            newState[k].validation = newState[k].validation ? newState[k].validation : /.*/ ;
+
+            if(!(newState[k].validation.test !== undefined || Array.isArray(newState[k].validation))){
+                console.warn(`typeof validation for ${k} is not regex or array, defaulting to match everything`)
+                newState[k].validation =  /.*/;
+            };
+
+            newState[k]['needsToBeToched'] = newState[k]['needsToBeToched'] ? newState[k]['needsToBeToched'] : true;
+            
+            newState[k]['hasBeenClicked'] =  !newState[k]['needsToBeToched'];
 
             newState[k]['isValid'] = (newState[k]['hasBeenClicked']
             ? (Array.isArray(newState[k].validation) ? newState[k].validation.includes(newState[k].value) : newState[k].validation.test(newState[k].value))

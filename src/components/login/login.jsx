@@ -20,7 +20,7 @@ export default function Login() {
     const FORM = {
         username:{
             validation:/^[A-Za-z]{4,10}$/,
-            value: '',
+            value: 'hola',
         },
         password:{
             validation:/^[A-Za-z]{4,10}$/,
