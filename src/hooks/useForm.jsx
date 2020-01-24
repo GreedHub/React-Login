@@ -22,6 +22,7 @@ function useForm(initialValue) {
             newState[k]['bind'] = {
                 value: newState[k].value,
                 error:!newState[k].isValid,
+                name:k,
                 onChange: e =>{
                     const name = e.target.name;
                     let newState = {...value};

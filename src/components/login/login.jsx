@@ -53,13 +53,11 @@ function Login() {
                 id="standard-error-helper-text"
                 label="Username"
                 helperText={!form.username.isValid ? "Invalid username" : "Insert a username"}
-                name="username"
                 {...form.username.bind}
             />
                             
             <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
             <Input
-                name="password"
                 id="standard-adornment-password"
                 type={showPassword ? 'text' : 'password'}
                 {...form.password.bind}
@@ -80,7 +78,6 @@ function Login() {
 
             <InputLabel htmlFor="name-native-error">Name</InputLabel>
             <NativeSelect
-            name="list"
             {...form.list.bind}>
             >
             {FORM.list.validation.map((option,index)=>{ return <option key={index} value={option}>{option}</option>})}
