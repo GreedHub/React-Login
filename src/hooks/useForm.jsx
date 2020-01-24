@@ -2,9 +2,9 @@ import {useState} from 'react'
 
 function useForm(initialValue) {
 
-    const setInitialValue = (initialState)=>{
+    const setInitialValue = ()=>{
 
-        let newState = initialState;
+        let newState = {...initialValue, form:{isValid:false}};
 
         Object.keys(newState).map(k=>{
    
@@ -57,10 +57,10 @@ function useForm(initialValue) {
         return newState;
     }
 
-    const [value,setValue] = useState(setInitialValue({...initialValue, form:{isValid:false}}));
+    const [value,setValue] = useState(setInitialValue());
 
     const reset = ()=>{
-        setValue(setInitialValue({...initialValue, form:{isValid:false}}));
+        setValue(setInitialValue());
     }
 
     return [value,reset]
