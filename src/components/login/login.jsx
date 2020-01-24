@@ -8,11 +8,12 @@ import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import useForm from '../../hooks/useForm';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
 
 function Login() {
 
-    const FORM_VALIDATION = {
+    const FORM = {
         username:{
             validation:/^[A-Za-z]{4,10}$/,
             value: '',
@@ -21,18 +22,20 @@ function Login() {
             validation:/^[A-Za-z]{4,10}$/,
             value: '',
         },
+        list:{
+            validation:['items','from','list'],
+            value:''
+        }
     }
 
-    const [form,resetForm] = useForm(FORM_VALIDATION);
+    const [form,resetForm] = useForm(FORM);
 
-/*     const [username,isValidUsername,bindUsername,resetUsername] = useInput('',/^[A-Za-z]{4,10}$/);
-    const [password,isValidPassword,bindPassword,resetPassword] = useInput('',/^[A-Za-z]{4,10}$/); */
     const [showPassword,setShowPassword] = useState(false);
 
-    const onSubmit = values => {
-        console.log({
-            form
-        });
+    const onSubmit = e => {
+        e.preventDefault();
+        console.log(form);
+        resetForm();
       };
 
     const handleClickShowPassword = () => {
@@ -73,7 +76,17 @@ function Login() {
                 }
             />
 
-            <input type="submit"/>
+
+
+            <InputLabel htmlFor="name-native-error">Name</InputLabel>
+            <NativeSelect
+            name="list"
+            {...form.list.bind}>
+            >
+            {FORM.list.validation.map((option,index)=>{ return <option key={index} value={option}>{option}</option>})}
+            </NativeSelect>
+
+              <input type="submit"/>
 
         </form>
     )

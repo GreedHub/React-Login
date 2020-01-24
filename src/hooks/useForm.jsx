@@ -8,12 +8,17 @@ function useForm(initialValue) {
 
         let newState = {...value};
 
-        for(let k in newState){
+        Object.keys(newState).map(k=>{
+   
             if(k === 'form'){
-                continue;
+                return null;
             }
 
-            newState[k]['isValid'] = newState[k].validation.test(newState[k].value) ? true : false;
+            newState[k]['isValid'] = (Array.isArray(newState[k].validation) 
+            ? newState[k].validation.includes(newState[k].value)
+            : newState[k].validation.test(newState[k].value) 
+            );
+
             newState[k]['bind'] = {
                 value: newState[k].value,
                 error:!newState[k].isValid,
@@ -23,44 +28,28 @@ function useForm(initialValue) {
                     let isFormValid = true;
 
                     newState[name].value = e.target.value;
-                    newState[name].isValid = newState[name].validation.test(newState[name].value) ? true : false;
+                    newState[name].isValid = (Array.isArray(newState[name].validation) 
+                        ? newState[name].validation.includes(newState[name].value)
+                        : newState[name].validation.test(newState[name].value) 
+                        );
 
-                    for(let k in newState){
-                        if(k==='form') continue;
-                        isFormValid = isFormValid && newState[k].isValid;
-                    }
+                    Object.keys(newState).reduce((isFormValid,k)=>{
+                        return k ==='form' ? isFormValid : isFormValid && newState[k].isValid;
+                    });
+
                     newState.form.isValid = isFormValid;
                     setValue(newState);
                 }
             }
-            
-        }
-    })()
 
-    /* 
-        {
-            user:{
-                validation:regexp || ['value1','value2','valueN'],
-                isValid: boolean,
-                value: '',
-                bind:
-            },
-            password:{
-                validation:regexp || ['value1','value2','valueN'],
-                isValid: boolean,
-                value: '',
-                bind:!value.user.isValid
-            },
-            form:{
-                isValid:boolean
-            }
-        }
-    */
+             return null;
+        });
+        
+    })();
 
     const reset = ()=>{
         setValue({...initialValue, form:{isValid:false}});
     }
-
 
     return [value,reset]
 }
