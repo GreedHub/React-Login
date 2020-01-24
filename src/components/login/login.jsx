@@ -11,7 +11,6 @@ import useForm from '../../hooks/useForm';
 import Select  from '@material-ui/core/NativeSelect';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 
@@ -40,7 +39,9 @@ export default function Login() {
     const onSubmit = e => {
         e.preventDefault();
         console.log(form);
-        resetForm();
+        if(form.status.isValid){
+            resetForm();
+        }
       };
 
     const handleClickShowPassword = () => {

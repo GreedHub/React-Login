@@ -4,11 +4,11 @@ function useForm(initialValue) {
 
     const setInitialValue = ()=>{
 
-        let newState = {...initialValue, form:{isValid:false}};
+        let newState = {...initialValue, status:{isValid:false}};
 
         Object.keys(newState).map(k=>{
    
-            if(k === 'form'){
+            if(k === 'status'){
                 return null;
             }
 
@@ -49,11 +49,11 @@ function useForm(initialValue) {
         : true);
 
         isFormValid = Object.keys(newState).reduce((isFormValid,k)=>{
-            return k ==='form' ? isFormValid :  isFormValid && newState[k].isValid && newState[k].hasBeenClicked;
+            return k ==='status' ? isFormValid :  isFormValid && newState[k].isValid && newState[k].hasBeenClicked;
         });
         newState[name]['bind'].value = newState[name].value;
         newState[name]['bind'].error = !newState[name].isValid;
-        newState.form.isValid = isFormValid;
+        newState.status.isValid = isFormValid;
         return newState;
     }
 
