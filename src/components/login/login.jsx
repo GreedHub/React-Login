@@ -8,10 +8,15 @@ import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import useForm from '../../hooks/useForm';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import Select  from '@material-ui/core/NativeSelect';
+import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 
-function Login() {
+
+export default function Login() {
 
     const FORM = {
         username:{
@@ -46,6 +51,19 @@ function Login() {
         event.preventDefault();
       };
 
+      const useStyles = makeStyles(theme => ({
+        formControl: {
+          margin: theme.spacing(1),
+          minWidth: 120,
+        },
+        selectEmpty: {
+          marginTop: theme.spacing(2),
+        },
+      }));
+
+      const classes = useStyles();
+
+
     return (
         <form onSubmit={onSubmit}>
 
@@ -55,38 +73,42 @@ function Login() {
                 helperText={!form.username.isValid ? "Invalid username" : "Insert a username"}
                 {...form.username.bind}
             />
-                            
-            <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-            <Input
-                id="standard-adornment-password"
-                type={showPassword ? 'text' : 'password'}
-                {...form.password.bind}
-                endAdornment={                
-                <InputAdornment position="end">
-                    <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                </InputAdornment>
-                }
-            />
+
+            <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                <Input
+                    id="standard-adornment-password"
+                    type={showPassword ? 'text' : 'password'}
+                    {...form.password.bind}
+                    endAdornment={                
+                    <InputAdornment position="end">
+                        <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                    </InputAdornment>
+                    }
+                />
+                {form.password.isValid ? <FormHelperText>Enter a password</FormHelperText> : <FormHelperText>Please enter a valid password</FormHelperText>}
+            </FormControl>
 
 
+            <FormControl className={classes.formControl}>
+                <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+                List
+                </InputLabel>
+                <Select {...form.list.bind}>   
+                    <option value=""></option>
+                    {FORM.list.validation.map((option,index)=>{ return <option key={index} value={option}>{option}</option>})}ç
+                </Select>
+                <FormHelperText>Please select an element of the list</FormHelperText>
+            </FormControl>
 
-            <InputLabel htmlFor="name-native-error">Name</InputLabel>
-            <NativeSelect
-            {...form.list.bind}>
-            >
-            {FORM.list.validation.map((option,index)=>{ return <option key={index} value={option}>{option}</option>})}
-            </NativeSelect>
-
-              <input type="submit"/>
+            <input type="submit"/>
 
         </form>
     )
 }
-
-export default Login
