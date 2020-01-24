@@ -7,20 +7,31 @@ import Input from '@material-ui/core/Input';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import useInput from '../../hooks/useInput';
+import useForm from '../../hooks/useForm';
 
 
 function Login() {
-    const [username,isValidUsername,bindUsername,resetUsername] = useInput('',/^[A-Za-z]{4,10}$/);
-    const [password,isValidPassword,bindPassword,resetPassword] = useInput('',/^[A-Za-z]{4,10}$/);
+
+    const FORM_VALIDATION = {
+        username:{
+            validation:/^[A-Za-z]{4,10}$/,
+            value: '',
+        },
+        password:{
+            validation:/^[A-Za-z]{4,10}$/,
+            value: '',
+        },
+    }
+
+    const [form,resetForm] = useForm(FORM_VALIDATION);
+
+/*     const [username,isValidUsername,bindUsername,resetUsername] = useInput('',/^[A-Za-z]{4,10}$/);
+    const [password,isValidPassword,bindPassword,resetPassword] = useInput('',/^[A-Za-z]{4,10}$/); */
     const [showPassword,setShowPassword] = useState(false);
 
     const onSubmit = values => {
         console.log({
-            username,
-            isValidUsername,
-            password,
-            isValidPassword
+            form
         });
       };
 
@@ -38,9 +49,9 @@ function Login() {
             <TextField
                 id="standard-error-helper-text"
                 label="Username"
-                helperText={!isValidUsername ? "Invalid username" : "Insert a username"}
+                helperText={!form.username.isValid ? "Invalid username" : "Insert a username"}
                 name="username"
-                {...bindUsername}
+                {...form.username.bind}
             />
                             
             <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
@@ -48,7 +59,7 @@ function Login() {
                 name="password"
                 id="standard-adornment-password"
                 type={showPassword ? 'text' : 'password'}
-                {...bindPassword}
+                {...form.password.bind}
                 endAdornment={                
                 <InputAdornment position="end">
                     <IconButton
