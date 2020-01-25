@@ -26,10 +26,6 @@ export default function Login() {
             validation:/^[A-Za-z]{4,10}$/,
             value: '',
         },
-        list:{
-            validation:['items','from','list'],
-            value:''
-        }
     }
 
     const [form,resetForm] = useForm(FORM);
@@ -100,20 +96,7 @@ export default function Login() {
                     {form.password.isValid ? <FormHelperText>Enter a password</FormHelperText> : <FormHelperText>Please enter a valid password</FormHelperText>}
                 </FormControl>
 
-                <FormControl className={classes.formControl}>
-                    <InputLabel shrink id="demo-simple-select-placeholder-label-label">
-                    List
-                    </InputLabel>
-                    <Select {...form.list.bind}>   
-                        <option value=""></option>
-                        {FORM.list.validation.map((option,index)=>{ return <option key={index} value={option}>{option}</option>})}ç
-                    </Select>
-                    <FormHelperText>Please select an element of the list</FormHelperText>
-                </FormControl>
             </div>
-
-
-
 
             <input type="submit"/>
 

@@ -7,13 +7,13 @@ form{
     padding: 50px 20px;
     border-radius: 5px;
     min-height: 500px;
-    min-width: 400px;
+    min-width: 320px;
     background-color: #f9f9f9;
 
     h1{
         text-align: center;
         margin:0px;
-
+        color:#3b3b3b;
     }
 
     input[type='submit']{
@@ -34,15 +34,15 @@ form{
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        min-width: 92%;
+        min-width: 100%;
+        overflow: hidden;
 
         .MuiFormControl-root{
             margin: 20px 0px;
         }
 
         div,input{
-            min-width: 87%;
-        
+            min-width: 87%;        
         }
     }
 }
