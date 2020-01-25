@@ -20,7 +20,7 @@ export default function Login() {
     const FORM = {
         username:{
             validation:/^[A-Za-z]{4,10}$/,
-            value: 'hola',
+            value: '',
         },
         password:{
             validation:/^[A-Za-z]{4,10}$/,
@@ -67,46 +67,53 @@ export default function Login() {
 
     return (
         <form onSubmit={onSubmit}>
+            
+            <h1 >Log In</h1>
 
-            <TextField
-                id="standard-error-helper-text"
-                label="Username"
-                helperText={!form.username.isValid ? "Invalid username" : "Insert a username"}
-                {...form.username.bind}
-            />
+            <div className="fields">
 
-            <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                <Input
-                    id="standard-adornment-password"
-                    type={showPassword ? 'text' : 'password'}
-                    {...form.password.bind}
-                    endAdornment={                
-                    <InputAdornment position="end">
-                        <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                    </InputAdornment>
-                    }
+                <TextField
+                    id="standard-error-helper-text"
+                    label="Username"
+                    helperText={!form.username.isValid ? "Invalid username" : "Insert a username"}
+                    {...form.username.bind}
                 />
-                {form.password.isValid ? <FormHelperText>Enter a password</FormHelperText> : <FormHelperText>Please enter a valid password</FormHelperText>}
-            </FormControl>
+
+                <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                    <Input
+                        id="standard-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        {...form.password.bind}
+                        endAdornment={                
+                        <InputAdornment position="end">
+                            <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                        </InputAdornment>
+                        }
+                    />
+                    {form.password.isValid ? <FormHelperText>Enter a password</FormHelperText> : <FormHelperText>Please enter a valid password</FormHelperText>}
+                </FormControl>
+
+                <FormControl className={classes.formControl}>
+                    <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+                    List
+                    </InputLabel>
+                    <Select {...form.list.bind}>   
+                        <option value=""></option>
+                        {FORM.list.validation.map((option,index)=>{ return <option key={index} value={option}>{option}</option>})}ç
+                    </Select>
+                    <FormHelperText>Please select an element of the list</FormHelperText>
+                </FormControl>
+            </div>
 
 
-            <FormControl className={classes.formControl}>
-                <InputLabel shrink id="demo-simple-select-placeholder-label-label">
-                List
-                </InputLabel>
-                <Select {...form.list.bind}>   
-                    <option value=""></option>
-                    {FORM.list.validation.map((option,index)=>{ return <option key={index} value={option}>{option}</option>})}ç
-                </Select>
-                <FormHelperText>Please select an element of the list</FormHelperText>
-            </FormControl>
+
 
             <input type="submit"/>
 

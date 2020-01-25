@@ -1,9 +1,48 @@
+
 form{
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    padding: 20px;
-    background-color: #f0f0f0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 20px;
     border-radius: 5px;
     min-height: 500px;
+    min-width: 400px;
+    background-color: #f9f9f9;
+
+    h1{
+        text-align: center;
+        margin:0px;
+
+    }
+
+    input[type='submit']{
+        background-color: #03A8F3;
+        color:#f9f9f9;
+        border-radius: 5px;
+        border:none;
+        font-size: 1.2em;
+        font-weight: bold;
+        padding: 15px 0px;
+        width: 87%;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .fields{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        min-width: 92%;
+
+        .MuiFormControl-root{
+            margin: 30px 0px;
+        }
+
+        div,input{
+            min-width: 87%;
+        
+        }
+    }
 }
