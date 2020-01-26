@@ -1,3 +1,5 @@
+@import './config/SassGlobals.scss'; 
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,17 +7,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: rgba(3,168,243,1);
+  background-color: color("main-black");
+/*   background: rgba(3,168,243,1);
 background: -moz-linear-gradient(-45deg, rgba(3,168,243,1) 0%, rgba(3,168,243,0.75) 100%);
 background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(3,168,243,1)), color-stop(100%, rgba(3,168,243,0.75)));
 background: -webkit-linear-gradient(-45deg, rgba(3,168,243,1) 0%, rgba(3,168,243,0.75) 100%);
 background: -o-linear-gradient(-45deg, rgba(3,168,243,1) 0%, rgba(3,168,243,0.75) 100%);
 background: -ms-linear-gradient(-45deg, rgba(3,168,243,1) 0%, rgba(3,168,243,0.75) 100%);
 background: linear-gradient(135deg, rgba(3,168,243,1) 0%, rgba(3,168,243,0.75) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03a8f3', endColorstr='#03a8f3', GradientType=1 );
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03a8f3', endColorstr='#03a8f3', GradientType=1 ); */
   width: 100vw;
-  height: 100vh;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;

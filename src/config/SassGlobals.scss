@@ -1,0 +1,14 @@
+$globalColors:(
+    main-red: #d1363a,
+    main-black: #252423,
+    main-blue:#03A8F3,
+    main-white:#e7e6e3,
+    main-grey:#adacaa,
+    text-white:#E6E5E2,
+    text-black:#2B2A29
+);
+
+
+@function color($color){
+   @return map-get($globalColors,$color)
+}

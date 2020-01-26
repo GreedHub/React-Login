@@ -8,14 +8,12 @@ import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import useForm from '../../hooks/useForm';
-import Select  from '@material-ui/core/NativeSelect';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 
-
-export default function Login() {
+export default function Login({token,login}) {
 
     const FORM = {
         username:{
@@ -28,15 +26,18 @@ export default function Login() {
         },
     }
 
+    
+
     const [form,resetForm] = useForm(FORM);
 
     const [showPassword,setShowPassword] = useState(false);
 
     const onSubmit = e => {
-        e.preventDefault();
-        console.log(form);
+        e.preventDefault();        
+
         if(form.status.isValid){
             resetForm();
+            login(form.username.value,form.password.value);
         }
       };
 
