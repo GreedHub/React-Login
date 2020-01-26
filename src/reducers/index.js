@@ -1,11 +1,15 @@
-import AppGlobals from '../config/AppGlobals'
+
 
 const INITIAL_STATE = {
-    loginURL: AppGlobals.baseURL
+    token:''
 }
 
 export default function loginApp(state = INITIAL_STATE, action){
     switch(action.type){        
+
+        case "LOGIN":
+            return {token:action.token};
+
         default:
             return state;
     }
