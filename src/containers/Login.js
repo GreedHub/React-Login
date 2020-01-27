@@ -1,44 +1,18 @@
 import { connect } from 'react-redux';
-import AppGlobals from '../config/AppGlobals'
 import Login from '../components/login/login';
-const request = require('request');
+import { userActions, defaultActions } from '../_actions';
 
-const mapStateToProps = state =>{
-    return {token: state.token}
+function mapStateToProps(state) {
+    const { user } = state;
+    return  {user} ;
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        login: async (username,password)=> {
-            const options = {
-                url: `${AppGlobals.baseURL}/login`,
-                method: 'POST',
-                body:JSON.stringify({
-                    user:username,
-                    password
-                }),
-                headers: {
-                    'Accept': 'application/json',
-                    'Accept-Charset': 'utf-8',
-                    'Content-Type':'application/json'
-                }
-            };
+const actionCreators = {
+    login: userActions.login,
+    logout: userActions.logout,
+    getDefaultPermissions: defaultActions.getDefaultPermissions
+};
 
-            let response = await new Promise((resolve,reject)=>{
-                request(options, function(err, res, body) {
-                    let response = JSON.parse(body);             
-                    resolve({type:'LOGIN',token:response.token});
-                });
-            });
+const connectedLoginPage = connect(mapStateToProps, actionCreators)(Login);
 
-            dispatch(response);
-            
-        }
-    }
-}
-
-const createConnection = connect( mapStateToProps, mapDispatchToProps);
-
-const ComponentWithConnectionToRedux = createConnection(Login);
-
-export default ComponentWithConnectionToRedux; 
+export default connectedLoginPage; 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './login.scss';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -12,8 +12,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
+export default function Login({user,getDefaultPermissions}) {
 
-export default function Login({token,login}) {
+    
 
     const FORM = {
         username:{
@@ -26,18 +27,22 @@ export default function Login({token,login}) {
         },
     }
 
-    
-
     const [form,resetForm] = useForm(FORM);
-
     const [showPassword,setShowPassword] = useState(false);
+    const [apiChecked,setApiChecked] = useState(false);
 
+    useEffect(() => {
+        if(!apiChecked){
+            getDefaultPermissions();
+            setApiChecked(true);
+        }
+    });
+    
     const onSubmit = e => {
         e.preventDefault();        
-
+        console.log(user)
         if(form.status.isValid){
             resetForm();
-            login(form.username.value,form.password.value);
         }
       };
 
@@ -98,7 +103,7 @@ export default function Login({token,login}) {
                 </FormControl>
 
             </div>
-
+                      
             <input type="submit"/>
 
         </form>
