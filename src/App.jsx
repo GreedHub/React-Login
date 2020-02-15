@@ -23,7 +23,6 @@ function App() {
     thunkMiddleware
   ));
 
-
   return (
     <div className="App">
       <Provider store={store}>
