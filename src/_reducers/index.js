@@ -1,4 +1,4 @@
-
+import { userConstants } from '../_constants';
 
 const INITIAL_STATE = {
     user:{
@@ -10,13 +10,15 @@ const INITIAL_STATE = {
 export default function loginApp(state = INITIAL_STATE, action){
     switch(action.type){        
 
-        case "LOGIN":
+        case userConstants.USER_ACTIONS.LOGIN_REQUEST:
+        case userConstants.USER_ACTIONS.LOGIN_SUCCESS:
+        case userConstants.USER_ACTIONS.LOGIN_FAILURE:
             return {
                 user:{
                     ...state.user,
-                    name: action.name,
-                    token: action.token,
-                    mail: action.mail,
+                    name: action.user.name,
+                    token: action.user.token,
+                    mail: action.user.mail,
                 }
             };
 

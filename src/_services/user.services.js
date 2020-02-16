@@ -2,18 +2,21 @@ import { AppConstants } from '../_constants';
 const axios = require('axios').default;
 
 export const userService = {
-    getDefaultPermissions,
+    login,
 }
 
-function getDefaultPermissions(){
+function login(username,password){
     return new Promise(async(resolve,reject)=>{
 
         const options = {
-            url: `${AppConstants.API_URL}/getDefaultPermissions`,
-            method: 'get',
+            url: `${AppConstants.API_URL}/login`,
+            method: 'post',
             headers: {
                 'Accept': 'application/json',
-                'Accept-Charset': 'utf-8'
+            },
+            data: {
+                username,
+                password,
             }
         };
 

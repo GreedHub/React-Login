@@ -13,7 +13,7 @@ import { history } from './_helpers';
 import { PrivateRoute } from './_components';
 
 /* Import APP components */
-import { Home } from './components/home';
+import Home from './components/home';
 import Login from './components/login';
 
 function App() {

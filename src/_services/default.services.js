@@ -13,7 +13,6 @@ function getDefaultPermissions(){
             method: 'get',
             headers: {
                 'Accept': 'application/json',
-                'Accept-Charset': 'utf-8'
             }
         };
 

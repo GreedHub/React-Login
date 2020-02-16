@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-export default function Login({user,getDefaultPermissions}) {
+export default function Login({user,getDefaultPermissions,login}) {
 
     
 
@@ -39,9 +39,9 @@ export default function Login({user,getDefaultPermissions}) {
     });
     
     const onSubmit = e => {
-        e.preventDefault();        
-        console.log(user)
+        e.preventDefault();
         if(form.status.isValid){
+            login(form.username.value,form.password.value)
             resetForm();
         }
       };
