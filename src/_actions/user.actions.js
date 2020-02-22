@@ -17,6 +17,11 @@ function login(username, password) {
             .then(
                 user => { 
                     dispatch(success(user.data));
+                    
+                    if( user.data.token == ""){
+                        dispatch(failure({code: user.data.code, message: user.data.message}));
+                    }
+
                     localStorage.setItem('user', JSON.stringify(user));
                     history.push('/');
                 },
