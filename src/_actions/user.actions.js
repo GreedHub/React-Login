@@ -16,12 +16,14 @@ function login(username, password) {
         userService.login(username, password)
             .then(
                 user => { 
+
+                    if( !user.data.token ) {
+                        dispatch(failure({code: user.data.code, message: user.data.message}));
+                        return;
+                    }
+                    
                     dispatch(success(user.data));
                     
-                    if( user.data.token == ""){
-                        dispatch(failure({code: user.data.code, message: user.data.message}));
-                    }
-
                     localStorage.setItem('user', JSON.stringify(user));
                     history.push('/');
                 },

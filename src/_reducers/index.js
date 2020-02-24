@@ -12,7 +12,7 @@ export default function loginApp(state = INITIAL_STATE, action){
 
         case userConstants.USER_ACTIONS.LOGIN_REQUEST:
         case userConstants.USER_ACTIONS.LOGIN_SUCCESS:
-        case userConstants.USER_ACTIONS.LOGIN_FAILURE:
+       
             return {
                 user:{
                     ...state.user,
@@ -21,6 +21,14 @@ export default function loginApp(state = INITIAL_STATE, action){
                     mail: action.user.mail,
                 }
             };
+
+
+        case userConstants.USER_ACTIONS.LOGIN_FAILURE:
+            return{
+                user:{
+                    ...state.user
+                }
+            }
 
         case "PERMISSIONS":
             let permissions = Array.isArray(action.permissions) ? action.permissions : state.user.permissions;

@@ -22,6 +22,6 @@ function getDefaultPermissions() {
 
     function request() { return { type: AppConstants.USER_ACTIONS.SET_PERMISSIONS, permissions:AppConstants.DEFAULT_PERMISSIONS } }
     function success(permissions) { return { type: AppConstants.USER_ACTIONS.SET_PERMISSIONS, permissions} }
-    function failure(error) { return { type: AppConstants.LOGIN_FAILURE, error } }
+    function failure(error) { return { type: AppConstants.SET_PERMISSIONS_FAILURE, error } }
 }
 
